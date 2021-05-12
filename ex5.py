@@ -45,12 +45,16 @@ def pkl_to_data(file):
 
 
 if __name__ == "__main__":
+    '''
+    Random: -8356
+    Mean: -3787
+    '''
     file = "example_testset.pkl"
     data = pkl_to_data(file)
 
     targets = []
     for input_arrays, known_arrays, border_x, border_y, sample_ids in data:
-        target = mean_img(input_arrays, known_arrays, border_x, border_y, sample_ids)
+        target = random_img(input_arrays, known_arrays, border_x, border_y, sample_ids)
 
         input_arrays[known_arrays == 0] = target
         img = Image.fromarray(input_arrays, 'L')
