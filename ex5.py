@@ -12,8 +12,9 @@ import random
 def random_img(input_arrays, known_arrays, border_x, border_y, sample_ids):
     target = input_arrays[known_arrays == 0]
     for i in range(len(target)):
-        target[i] = random.randint(0,255)
+        target[i] = random.randint(0, 255)
     return target
+
 
 def mean_img(input_arrays, known_arrays, border_x, border_y, sample_ids):
     mean = np.mean(input_arrays)
@@ -51,7 +52,7 @@ if __name__ == "__main__":
     for input_arrays, known_arrays, border_x, border_y, sample_ids in data:
         target = mean_img(input_arrays, known_arrays, border_x, border_y, sample_ids)
 
-        input_arrays[known_arrays==0]=target
+        input_arrays[known_arrays == 0] = target
         img = Image.fromarray(input_arrays, 'L')
         img.save(f"outputIMG/{sample_ids}.png")
 
@@ -59,4 +60,3 @@ if __name__ == "__main__":
 
     with open("solution.pkl", "wb") as submission:
         pickle.dump(targets, submission)
-
