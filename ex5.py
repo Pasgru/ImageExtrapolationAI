@@ -15,6 +15,12 @@ def random_img(input_arrays, known_arrays, border_x, border_y, sample_ids):
         target[i] = random.randint(0,255)
     return target
 
+def mean_img(input_arrays, known_arrays, border_x, border_y, sample_ids):
+    mean = np.mean(input_arrays)
+    target = input_arrays[known_arrays == 0]
+    target[:] = mean
+    return target
+
 
 def make_img(data):
     for i in data:
@@ -43,7 +49,7 @@ if __name__ == "__main__":
 
     targets = []
     for input_arrays, known_arrays, border_x, border_y, sample_ids in data:
-        target = random_img(input_arrays, known_arrays, border_x, border_y, sample_ids)
+        target = mean_img(input_arrays, known_arrays, border_x, border_y, sample_ids)
 
         input_arrays[known_arrays==0]=target
         img = Image.fromarray(input_arrays, 'L')
